@@ -104,25 +104,25 @@ def find_image_in_hwnd(hwnd, template_name, threshold=0.75):
 def set_main_window_and_cache():
     global main_hwnd, alt_hwnds, classic_btn_coords, two_teams_btn_coords
     
-    print("\n[!] Please click on your MAIN Roblox window to focus it, then press F1.")
+    print("\n[!] Click on your main account window, then press F1.")
     
     while not keyboard.is_pressed('F1'):
         time.sleep(0.1)
         
     main_hwnd = win32gui.GetForegroundWindow()
     if win32gui.GetWindowText(main_hwnd) != "Roblox":
-        print("[ERROR] The active window is not named 'Roblox'. Please try again.")
+        print("[ERROR] Active window is not named 'Roblox'. Please try again.")
         main_hwnd = None
         return False
         
     all_hwnds = get_roblox_hwnds()
     alt_hwnds = [h for h in all_hwnds if h != main_hwnd]
     
-    print(f"\n[+] Main Window Locked! (HWND: {main_hwnd})")
-    print(f"[+] Detected {len(alt_hwnds)} Alt Accounts.")
+    print(f"\n[+] Main Window Locked (HWND: {main_hwnd})")
+    print(f"[+] Detected {len(alt_hwnds)} Alt Accounts")
     time.sleep(1) 
     
-    print("\n[!] Scanning main window for mode buttons...")
+    print("\n[!] Scanning main window for mode buttons")
     force_foreground(main_hwnd)
     time.sleep(0.5)
     
@@ -146,20 +146,20 @@ def set_main_window_and_cache():
         two_teams_btn_coords = classic_btn_coords
         print(f"[+] Coords set: {classic_btn_coords}")
 
-    print("\n[!] Verifying...")
+    print("\n[!] Verifying")
     two_present, _ = check_mode_button("Select 2 Teams.png", two_teams_btn_coords, 0.50)
     if not two_present and two_teams_btn_coords:
-        print("[-] '2 Teams' verify failed.")
+        print("[-] '2 Teams' verify failed")
     elif two_present:
-        print("[+] '2 Teams' verified.")
+        print("[+] '2 Teams' verified")
 
     classic_present, _ = check_mode_button("Select Classic.png", classic_btn_coords, 0.50)
     if not classic_present and classic_btn_coords:
-        print("[-] 'Classic' verify failed.")
+        print("[-] 'Classic' verify failed")
     elif classic_present:
-        print("[+] 'Classic' verified.")
+        print("[+] 'Classic' verified")
         
-    print("\n[+] Setup Complete.")
+    print("\n[+] Setup Complete")
     return True
     
 def check_mode_button(template_name, cached_coords, threshold=0.60):
@@ -304,7 +304,7 @@ def afk_farm_loop():
             p, _, _ = check_any_mode()
             
             if not p:
-                print("\n[!] STOP: Buttons gone, returning to main.")
+                print("\n[!] Buttons gone, returning to main.")
                 
                 while True:
                     if not is_running: return
